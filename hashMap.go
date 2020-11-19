@@ -1,8 +1,9 @@
-package hashMap
+package github.com/slimaneakalia/goHashmap/hashmap
 
 import (
 	"errors"
 	"math"
+	"github.com/slimaneakalia/goLinkedList/linkedList"
 )
 
 const (

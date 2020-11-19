@@ -1,6 +1,9 @@
-package hashMap
+package github.com/slimaneakalia/goHashmap/hashmap_test
 
-import "testing"
+import (
+	"testing"
+	"github.com/slimaneakalia/goHashmap/hashmap"
+)
 
 func TestSetAndGet(t *testing.T) {
 	h := NewHashMap()
