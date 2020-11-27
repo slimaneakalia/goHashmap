@@ -1,9 +1,9 @@
-package github.com/slimaneakalia/goHashmap/hashmap
+package goHashmap
 
 import (
 	"errors"
 	"math"
-	"github.com/slimaneakalia/goLinkedList/linkedList"
+	"github.com/slimaneakalia/goLinkedList"
 )
 
 const (
@@ -12,7 +12,7 @@ const (
 )
 
 type HashMap struct{
-	dataSlice []*LinkedList
+	dataSlice []*goLinkedList.LinkedList
 	usedColumns int
 }
 
@@ -24,7 +24,7 @@ type ValueNode struct {
 
 func NewHashMap() *HashMap{
 	return &HashMap{
-		dataSlice: make([]*LinkedList, initialMaxSize),
+		dataSlice: make([]*goLinkedList.LinkedList, initialMaxSize),
 	}
 }
 
@@ -44,10 +44,10 @@ func (h *HashMap) Set(key string, value interface{}) (bool, error){
 	} else if h.dataSlice[idx] != nil {
 		h.dataSlice[idx] = h.dataSlice[idx].AddValue(valueNode)
 	} else {
-		h.dataSlice[idx] = &LinkedList{ value: valueNode }
+		h.dataSlice[idx] = &goLinkedList.LinkedList{ Value: valueNode }
 		h.usedColumns++
 		if h.usedColumns == len(h.dataSlice) - 1{
-			newSlice := make([]*LinkedList, len(h.dataSlice)*resizeFactor)
+			newSlice := make([]*goLinkedList.LinkedList, len(h.dataSlice)*resizeFactor)
 			copy(newSlice, h.dataSlice)
 			h.dataSlice = newSlice
 		}
@@ -92,7 +92,7 @@ func (h *HashMap) getValueNode(key string) (*ValueNode, int) {
 	if h.dataSlice[idx] != nil {
 		node := h.dataSlice[idx].FindValue(key, valueNodeKeyComparator)
 		if node != nil {
-			return node.GetValue().(*ValueNode), idx
+			return node.Value.(*ValueNode), idx
 		}
 	}
 	return nil, idx
