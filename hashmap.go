@@ -1,9 +1,9 @@
-package goHashmap
+package hashmap
 
 import (
 	"errors"
 	"math"
-	"github.com/slimaneakalia/goLinkedList"
+	"github.com/slimaneakalia/golinkedList"
 )
 
 const (
@@ -12,7 +12,7 @@ const (
 )
 
 type HashMap struct{
-	dataSlice []*goLinkedList.LinkedList
+	dataSlice []*golinkedList.LinkedList
 	usedColumns int
 }
 
@@ -24,7 +24,7 @@ type ValueNode struct {
 
 func NewHashMap() *HashMap{
 	return &HashMap{
-		dataSlice: make([]*goLinkedList.LinkedList, initialMaxSize),
+		dataSlice: make([]*golinkedList.LinkedList, initialMaxSize),
 	}
 }
 
@@ -44,10 +44,10 @@ func (h *HashMap) Set(key string, value interface{}) (bool, error){
 	} else if h.dataSlice[idx] != nil {
 		h.dataSlice[idx] = h.dataSlice[idx].AddValue(valueNode)
 	} else {
-		h.dataSlice[idx] = &goLinkedList.LinkedList{ Value: valueNode }
+		h.dataSlice[idx] = &golinkedList.LinkedList{ Value: valueNode }
 		h.usedColumns++
 		if h.usedColumns == len(h.dataSlice) - 1{
-			newSlice := make([]*goLinkedList.LinkedList, len(h.dataSlice)*resizeFactor)
+			newSlice := make([]*golinkedList.LinkedList, len(h.dataSlice)*resizeFactor)
 			copy(newSlice, h.dataSlice)
 			h.dataSlice = newSlice
 		}

@@ -1,12 +1,12 @@
-package goHashmap_test
+package gohashmap_test
 
 import (
 	"testing"
-	"github.com/slimaneakalia/goHashmap"
+	"github.com/slimaneakalia/gohashmap"
 )
 
 func TestSetAndGet(t *testing.T) {
-	h := goHashmap.NewHashMap()
+	h := gohashmap.NewHashMap()
 	added, err := h.Set("key-1", "Value 1")
 	if !added {
 		t.Errorf("Failed to set in the hashmap, error: %v", err)
